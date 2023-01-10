@@ -6,7 +6,7 @@ import { flsModules } from "./modules.js";
 
 //Geolocation_Map
 
-/
+
 // импортируем функцию
 // import { getMap } from './map.js'
 
@@ -16,7 +16,7 @@ import { flsModules } from "./modules.js";
 const $cities = document.getElementById('cities');
 (async () => {
 	// получаем объект с городами
-	const response = await fetch('cities.json');
+	const response = await fetch('../cities.json');
 	const cities = await response.json();
 	console.log(cities);
 	// перебираем города
@@ -54,7 +54,7 @@ $cities.addEventListener('click', ({ target }) => {
 })
 
 
-	/ создаем локальные переменные для карты и маркера
+// создаем локальные переменные для карты и маркера
 // каждый модуль имеет собственное пространство имен
 let map = null
 let marker = null
