@@ -22,36 +22,47 @@
             }));
         }
     }), 0);
-    const $cities = document.getElementById("cities");
-    (async () => {
-        const response = await fetch("../cities.json");
-        const cities = await response.json();
-        console.log(cities);
-        for (const city in cities) {
-            const $button = document.createElement("button");
-            $button.textContent = city;
-            const {lat, lon} = cities[city];
-            $button.dataset.city = city;
-            $button.dataset.lat = lat;
-            $button.dataset.lon = lon;
-            $cities.append($button);
-        }
-    })();
-    $cities.addEventListener("click", (({target}) => {
-        if ("BUTTON" !== target.tagName) return;
-        const {city, lat, lon} = target.dataset;
-        const position = [ lat, lon ];
-        getMap(position, city);
-    }));
+    function initMap() {
+        navigator.geolocation.getCurrentPosition((function(position) {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            return lat, lng;
+        }));
+        console.log(navigator);
+        const uluru = {
+            lat,
+            lng
+        };
+        const map = new google.maps.Map(document.getElementById("map_canvas"), {
+            zoom: 6,
+            center: uluru
+        });
+        new google.maps.Marker({
+            position: uluru,
+            map
+        });
+    }
+    window.initMap = initMap;
+    document.getElementById("my_position").onclick = () => {
+        navigator.geolocation.getCurrentPosition(success, error, {
+            enableHighAccuracy: true
+        });
+    };
+    function success({coords}) {
+        const {latitude, longitude} = coords;
+        const currentPosition = [ latitude, longitude ];
+        getMap(currentPosition, "You are here");
+    }
+    function error({message}) {
+        console.log(message);
+    }
     let map = null;
-    let marker = null;
     function getMap(position, tooltip) {
-        if (null === map) map = L.map("map").setView(position, 15); else map.flyTo(position);
+        if (null === map) map = L.map("map").setView(position, 15); else return;
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
             attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
-        if (marker) map.removeLayer(marker);
-        marker = new L.Marker(position).addTo(map).bindPopup(tooltip).openPopup();
+        L.marker(position).addTo(map).bindPopup(tooltip).openPopup();
     }
     window["FLS"] = true;
     isWebp();

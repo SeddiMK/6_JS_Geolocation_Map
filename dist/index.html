@@ -6,11 +6,13 @@
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
 	<!-- стили карты -->
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css?_v=20230110171032" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css?_v=20230111141338" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
 	<!-- скрипт карты -->
-	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js?_v=20230110171032" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js?_v=20230111141338" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=default&_v=20230111141338"></script>
+
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20230110171032">
+	<link rel="stylesheet" href="css/style.min.css?_v=20230111141338">
 	<link rel="shortcut icon" href="favicon.ico">
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,6 +32,9 @@
 			<!-- плавный переход по городам -->
 			<div id="cities"></div>
 		</main>
+		<section class="cnt">
+			<div id="map_canvas"></div>
+		</section>
 		<footer class="footer">
 			<div class="footer__container">
 			</div>
@@ -45,7 +50,9 @@
 		</div>
 	</div>
 </div> -->
-	<script src="js/app.min.js?_v=20230110171032"></script>
+	<script src="js/app.min.js?_v=20230111141338"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&_v=20230111141338"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly&_v=20230111141338" defer></script>
 </body>
 
 </html>

@@ -6,81 +6,104 @@ import { flsModules } from "./modules.js";
 
 //Geolocation_Map
 
+// Map google.com
 
+
+
+
+// Initialize and add the map
+function initMap() {
+	navigator.geolocation.getCurrentPosition(function (position) {
+
+		// Get the coordinates of the current position.
+		const lat = position.coords.latitude;
+		const lng = position.coords.longitude;
+		return lat, lng;
+		// Create a new map and place a marker at the device location.
+		// var map = new GMaps({
+		// 	el: '#map',
+		// 	lat: lat,
+		// 	lng: lng
+		// });
+
+		// map.addMarker({
+		// 	lat: lat,
+		// 	lng: lng
+		// });
+
+	});
+	console.log(navigator);
+	// The location of Uluru
+	const uluru = { lat, lng };
+	// The map, centered at Uluru
+	const map = new google.maps.Map(document.getElementById("map_canvas"), {
+		zoom: 6,
+		center: uluru,
+	});
+	// The marker, positioned at Uluru
+	const marker = new google.maps.Marker({
+		position: uluru,
+		map: map,
+	});
+}
+
+window.initMap = initMap;
+
+
+// — при клике на метку, показать окно с информацией, на карте map с привязкой к marker.
+
+
+//===========================================================================================
+// Map leafletjs.com
 // импортируем функцию
 // import { getMap } from './map.js'
 
 // находим кнопку и добавляем к ней обработчик
+document.getElementById('my_position').onclick = () => {
+	navigator.geolocation.getCurrentPosition(success, error, {
+		enableHighAccuracy: true
+	})
+}
 
-// получаем контейнер для городов
-const $cities = document.getElementById('cities');
-(async () => {
-	// получаем объект с городами
-	const response = await fetch('../cities.json');
-	const cities = await response.json();
-	console.log(cities);
-	// перебираем города
-	for (const city in cities) {
-		// создаем кнопку
-		const $button = document.createElement('button');
+function success({ coords }) {
+	const { latitude, longitude } = coords
+	const currentPosition = [latitude, longitude]
+	// вызываем функцию, передавая ей текущую позицию и сообщение
+	getMap(currentPosition, 'You are here')
+}
 
-		// текстовое содержимое кнопки - название города
-		$button.textContent = city
-
-		// получаем широту и долготу
-		const { lat, lon } = cities[city]
-
-		// записываем название города, широту и долготу
-		// в соответствующие data-атрибуты
-		$button.dataset.city = city
-		$button.dataset.lat = lat
-		$button.dataset.lon = lon
-
-		// добавляем кнопку в контейнер
-		$cities.append($button)
-	}
-})()
-
-// обрабатываем нажатие кнопки
-$cities.addEventListener('click', ({ target }) => {
-	// нас интересует только нажатие кнопки
-	if (target.tagName !== 'BUTTON') return
-
-	// получаем название города, широту и долготу из data-атрибутов
-	const { city, lat, lon } = target.dataset
-	const position = [lat, lon]
-	// вызываем функцию, передавая ей позицию и название города
-	getMap(position, city)
-})
+function error({ message }) {
+	console.log(message)
+}
 
 
 // создаем локальные переменные для карты и маркера
 // каждый модуль имеет собственное пространство имен
 let map = null
-let marker = null
+// let marker = null
 
+// функция принимает позицию - массив с широтой и долготой
+// и сообщение, отображаемое над маркером (tooltip)
 export function getMap(position, tooltip) {
+	// если карта не была инициализирована
 	if (map === null) {
+		// второй аргумент, принимаемый методом setView - это масштаб (zoom)
 		map = L.map('map').setView(position, 15)
-	} else {
-		// перемещение к следующей позиции
-		map.flyTo(position)
-	}
+	} else return
 
+	// что-то типа рекламы
+	// без этого карта работать не будет
 	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		attribution:
 			'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 	}).addTo(map)
 
-	// удаление предыдущего маркера
-	if (marker) {
-		map.removeLayer(marker)
-	}
-	marker = new L.Marker(position).addTo(map).bindPopup(tooltip).openPopup()
+	// добавляем маркер с сообщением
+	L.marker(position).addTo(map).bindPopup(tooltip).openPopup()
 }
 
 
-//================================================
+//===Информация о пользователе браузера/сайта=============================================
 // Info user ip, location, ...
 // class userInfo {
 // 	constructor() {
