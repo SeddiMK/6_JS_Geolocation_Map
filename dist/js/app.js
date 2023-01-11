@@ -23,23 +23,15 @@
         }
     }), 0);
     function initMap() {
-        navigator.geolocation.getCurrentPosition((function(position) {
-            const lat = position.coords.latitude;
-            const lng = position.coords.longitude;
-            return lat, lng;
-        }));
-        console.log(navigator);
-        const uluru = {
-            lat,
-            lng
-        };
-        const map = new google.maps.Map(document.getElementById("map_canvas"), {
-            zoom: 6,
-            center: uluru
-        });
-        new google.maps.Marker({
-            position: uluru,
-            map
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        console.log(position);
+        map = new google.maps.Map(document.getElementById("map_canvas"), {
+            center: {
+                lat,
+                lng
+            },
+            zoom: 8
         });
     }
     window.initMap = initMap;

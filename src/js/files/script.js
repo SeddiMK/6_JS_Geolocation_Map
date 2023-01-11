@@ -12,42 +12,42 @@ import { flsModules } from "./modules.js";
 
 
 // Initialize and add the map
+//function initMap() {
+//navigator.geolocation.getCurrentPosition(function (position) {
+
+// 	// Get the coordinates of the current position.
+// 	const lat = position.coords.latitude;
+// 	const lng = position.coords.longitude;
+// 	console.log(position);
+// 	//return lat, lng;
+// 	// Create a new map and place a marker at the device location.
+// 	const map = new google.maps.Map(document.getElementById("map_canvas"), {
+// 		zoom: 6,
+// 		// 		center: uluru,
+// 		lat: lat,
+// 		lng: lng
+// 	});
+
+// 	map.addMarker({
+// 		lat: lat,
+// 		lng: lng,
+// 	});
+
+// });
+//}
+
 function initMap() {
-	navigator.geolocation.getCurrentPosition(function (position) {
-
-		// Get the coordinates of the current position.
-		const lat = position.coords.latitude;
-		const lng = position.coords.longitude;
-		return lat, lng;
-		// Create a new map and place a marker at the device location.
-		// var map = new GMaps({
-		// 	el: '#map',
-		// 	lat: lat,
-		// 	lng: lng
-		// });
-
-		// map.addMarker({
-		// 	lat: lat,
-		// 	lng: lng
-		// });
-
-	});
-	console.log(navigator);
-	// The location of Uluru
-	const uluru = { lat, lng };
-	// The map, centered at Uluru
-	const map = new google.maps.Map(document.getElementById("map_canvas"), {
-		zoom: 6,
-		center: uluru,
-	});
-	// The marker, positioned at Uluru
-	const marker = new google.maps.Marker({
-		position: uluru,
-		map: map,
+	const lat = position.coords.latitude;
+	const lng = position.coords.longitude;
+	console.log(position);
+	map = new google.maps.Map(document.getElementById("map_canvas"), {
+		center: { lat: lat, lng: lng },
+		zoom: 8,
 	});
 }
 
 window.initMap = initMap;
+
 
 
 // — при клике на метку, показать окно с информацией, на карте map с привязкой к marker.
@@ -106,48 +106,48 @@ export function getMap(position, tooltip) {
 //===Информация о пользователе браузера/сайта=============================================
 // Info user ip, location, ...
 // class userInfo {
-// 	constructor() {
-// 		this.timeOpened = new Date();
-// 		this.timeZone = (new Date()).getTimezoneOffset() / 60;
-// 	}
+// 	// 	constructor() {
+// 	// 		this.timeOpened = new Date();
+// 	// 		this.timeZone = (new Date()).getTimezoneOffset() / 60;
+// 	// 	}
 
-// 	pageon() {
-// 		//file location
-// 		return window.location.pathname
-// 	}
+// 	// 	pageon() {
+// 	// 		//file location
+// 	// 		return window.location.pathname
+// 	// 	}
 
-// 	referrer() {
-// 		//property returns the URL of the page that linked to this page
-// 		return document.referrer;
-// 	}
-// 	previousSites() {
-// 		//integer represeting the number of elements in the sessini history
-// 		return history.length;
-// 	}
-// 	browserInfo() {
-// 		return navigator;
-// 	}
-// 	dataCookies() {
-// 		return decodeURIComponent(document.cookie.split(";"));
-// 	}
-// 	dataStorage() {
-// 		return localStorage;
-// 	}
-// 	sizeScreen() {
-// 		return {
-// 			width: screen.width,
-// 			height: screen.height,
-// 			clientWidth: document.body.clientWidth,
-// 			clientHeight: document.body.clientHeight,
-// 			innerWidth: window.innerWidth,
-// 			innerHeight: window.innerHeight,
-// 			screenAvailWidth: screen.availWidth,
-// 			screenAvailHeight: screen.availHeight,
-// 			colorDepth: screen.colorDepth,
-// 			pixelDepth: screen.pixelDepth
+// 	// 	referrer() {
+// 	// 		//property returns the URL of the page that linked to this page
+// 	// 		return document.referrer;
+// 	// 	}
+// 	// 	previousSites() {
+// 	// 		//integer represeting the number of elements in the sessini history
+// 	// 		return history.length;
+// 	// 	}
+// 	// 	browserInfo() {
+// 	// 		return navigator;
+// 	// 	}
+// 	// 	dataCookies() {
+// 	// 		return decodeURIComponent(document.cookie.split(";"));
+// 	// 	}
+// 	// 	dataStorage() {
+// 	// 		return localStorage;
+// 	// 	}
+// 	// 	sizeScreen() {
+// 	// 		return {
+// 	// 			width: screen.width,
+// 	// 			height: screen.height,
+// 	// 			clientWidth: document.body.clientWidth,
+// 	// 			clientHeight: document.body.clientHeight,
+// 	// 			innerWidth: window.innerWidth,
+// 	// 			innerHeight: window.innerHeight,
+// 	// 			screenAvailWidth: screen.availWidth,
+// 	// 			screenAvailHeight: screen.availHeight,
+// 	// 			colorDepth: screen.colorDepth,
+// 	// 			pixelDepth: screen.pixelDepth
 
-// 		}
-// 	}
+// 	// 		}
+// 	// 	}
 
 
 // 	async position() {
@@ -166,42 +166,42 @@ export function getMap(position, tooltip) {
 // 		};
 // 	}
 
-// 	async battery() {
-// 		/**
-// 		 * charging
-// 		 * chargingTime
-// 		 * level
-// 		 */
-// 		return await navigator.getBattery();
+// 	// 	async battery() {
+// 	// 		/**
+// 	// 		 * charging
+// 	// 		 * chargingTime
+// 	// 		 * level
+// 	// 		 */
+// 	// 		return await navigator.getBattery();
 
-// 	}
-// 	async ip() {
-// 		/**
-// 		 *  city
-// 		 *  continent
-// 		 *  countryCode
-// 		 *  countryName
-// 		 *  ipAddress
-// 		 *  statProv
-// 		 */
-// 		let res = await (await fetch('https://api.db-ip.com/v2/free/self'));
-// 		let data = await res.json()
-// 		return data;
+// 	// 	}
+// 	// 	async ip() {
+// 	// 		/**
+// 	// 		 *  city
+// 	// 		 *  continent
+// 	// 		 *  countryCode
+// 	// 		 *  countryName
+// 	// 		 *  ipAddress
+// 	// 		 *  statProv
+// 	// 		 */
+// 	// 		let res = await (await fetch('https://api.db-ip.com/v2/free/self'));
+// 	// 		let data = await res.json()
+// 	// 		return data;
 
-// 	}
+// 	// 	}
 // }
 
 // const info = new userInfo();
 
 // async function t1() {
-// 	// console.log(info.referrer());
-// 	// console.log(info.previousSites());
-// 	// console.log(info.browserInfo());
-// 	// console.log(info.dataCookies());
-// 	// console.log(info.dataStorage());
-// 	// console.log(info.sizeScreen());
-// 	//console.log(await info.position());
-// 	console.log(await info.battery());
-// 	console.log(await info.ip());
+// 	// 	// console.log(info.referrer());
+// 	// 	// console.log(info.previousSites());
+// 	// 	// console.log(info.browserInfo());
+// 	// 	// console.log(info.dataCookies());
+// 	// 	// console.log(info.dataStorage());
+// 	// 	// console.log(info.sizeScreen());
+// 	console.log(await info.position(long, lat));
+// 	// 	console.log(await info.battery());
+// 	// 	console.log(await info.ip());
 // }
 // t1();
