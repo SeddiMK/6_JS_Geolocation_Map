@@ -23,16 +23,22 @@
         }
     }), 0);
     function initMap() {
-        const lat = position.coords.latitude;
-        const lng = position.coords.longitude;
-        console.log(position);
-        map = new google.maps.Map(document.getElementById("map_canvas"), {
-            center: {
+        navigator.geolocation.getCurrentPosition((function(position) {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            console.log(lat, lng);
+            const mapG = new google.maps.Map(document.getElementById("map_canvas"), {
+                zoom: 6,
+                center: {
+                    lat,
+                    lng
+                }
+            });
+            mapG.addMarker({
                 lat,
                 lng
-            },
-            zoom: 8
-        });
+            });
+        }));
     }
     window.initMap = initMap;
     document.getElementById("my_position").onclick = () => {

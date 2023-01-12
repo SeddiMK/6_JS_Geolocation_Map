@@ -8,43 +8,45 @@ import { flsModules } from "./modules.js";
 
 // Map google.com
 
+//https://v3c.ru/javascript/gugl-karta-dlya-sajta
 
 
 
 // Initialize and add the map
-//function initMap() {
-//navigator.geolocation.getCurrentPosition(function (position) {
+function initMap() {
+	navigator.geolocation.getCurrentPosition(function (position) {
+		// Get the coordinates of the current position.
+		const lat = position.coords.latitude;
+		const lng = position.coords.longitude;
+		console.log(lat, lng);
+		//return lat, lng;
 
-// 	// Get the coordinates of the current position.
+		// Create a new map and place a marker at the device location.
+		const mapG = new google.maps.Map(document.getElementById("map_canvas"), {
+			zoom: 6,
+			// 		center: uluru,
+			// lat: lat,
+			// lng: lng
+			center: { lat: lat, lng: lng },
+		});
+
+		mapG.addMarker({
+			lat: lat,
+			lng: lng,
+		});
+	});
+}
+
+
+// function initMap() {
 // 	const lat = position.coords.latitude;
 // 	const lng = position.coords.longitude;
 // 	console.log(position);
-// 	//return lat, lng;
-// 	// Create a new map and place a marker at the device location.
-// 	const map = new google.maps.Map(document.getElementById("map_canvas"), {
-// 		zoom: 6,
-// 		// 		center: uluru,
-// 		lat: lat,
-// 		lng: lng
+// 	map = new google.maps.Map(document.getElementById("map_canvas"), {
+// 		center: { lat: lat, lng: lng },
+// 		zoom: 8,
 // 	});
-
-// 	map.addMarker({
-// 		lat: lat,
-// 		lng: lng,
-// 	});
-
-// });
-//}
-
-function initMap() {
-	const lat = position.coords.latitude;
-	const lng = position.coords.longitude;
-	console.log(position);
-	map = new google.maps.Map(document.getElementById("map_canvas"), {
-		center: { lat: lat, lng: lng },
-		zoom: 8,
-	});
-}
+// }
 
 window.initMap = initMap;
 
