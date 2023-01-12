@@ -61,11 +61,17 @@ window.initMap = initMap;
 // import { getMap } from './map.js'
 
 // находим кнопку и добавляем к ней обработчик
-document.getElementById('my_position').onclick = () => {
+function initLeaftMap() {
 	navigator.geolocation.getCurrentPosition(success, error, {
 		enableHighAccuracy: true
 	})
 }
+initLeaftMap();
+// document.getElementById('my_position').onclick = () => {
+// 	navigator.geolocation.getCurrentPosition(success, error, {
+// 		enableHighAccuracy: true
+// 	})
+// }
 
 function success({ coords }) {
 	const { latitude, longitude } = coords

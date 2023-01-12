@@ -41,11 +41,12 @@
         }));
     }
     window.initMap = initMap;
-    document.getElementById("my_position").onclick = () => {
+    function initLeaftMap() {
         navigator.geolocation.getCurrentPosition(success, error, {
             enableHighAccuracy: true
         });
-    };
+    }
+    initLeaftMap();
     function success({coords}) {
         const {latitude, longitude} = coords;
         const currentPosition = [ latitude, longitude ];
