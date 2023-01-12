@@ -154,6 +154,16 @@ body {
           box-shadow: 0 0 1px #222;
 }
 
+#map_canvas {
+  border-radius: 4px;
+  -webkit-box-shadow: 0 0 1px #222;
+          box-shadow: 0 0 1px #222;
+  height: 400px;
+  /* The height is 400 pixels */
+  width: 100%;
+  /* The width is the width of the web page */
+}
+
 button {
   padding: 0.25em 0.75em;
   margin: 1em 0.5em;
